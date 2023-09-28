@@ -8,6 +8,13 @@
 \lhead{Computational Neuroscience - 01.1 Neurons and action potential - Conor}
 \rhead{\thepage}
 \cfoot{}
+
+
+\usepackage{ifthen}
+\newboolean{nopics}
+\setboolean{nopics}{true}
+
+
 \begin{document}
 
 \section*{What is this unit about?} 
@@ -66,10 +73,14 @@ contains, for example, the nucleus where the genetic material is found
 and which controls the synthesis of proteins.
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{A drawing of a neuron. There is a roughly circular central area labelled soma, it has a black blob in it labelled nucleus. There are lots of thin lines protruding from it labelled dendrites. A single much longer lines comes out from the side, this splits and splits again, a few times. It is labelled axon with the very end points labelled axon terminals}}
+{
   \begin{center}
-    \includegraphics[width=8cm]{neuron.png}
-    \end{center}
-  \caption{\textbf{A diagram of a neuron}; this cartoon shows the main parts of the neuron, very very roughly, the dendrites, where the signals come in, the soma where they get added together and the axon, which carries signals on to other neurons. Figure from \texttt{wikimedia}\label{fig_neuron}}
+  \includegraphics[width=8cm]{neuron.png}
+  \end{center}
+}
+\caption{\textbf{A diagram of a neuron}; this cartoon shows the main parts of the neuron, very very roughly, the dendrites, where the signals come in, the soma where they get added together and the axon, which carries signals on to other neurons. Figure from \texttt{wikimedia}\label{fig_neuron}}
 \end{figure}
 
 There are two sorts of tubes extending from the soma, the
@@ -92,9 +103,13 @@ bio-mechanical machinery to allow the signals to be communicated from
 axon to dendrite. We will discuss this further soon.
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{A dark yellow picture has some neurons in a darker, browner colour, these are vaguely triangular shaped with thick lines running from them, largely up from their apex, other lines run in all directions from their base.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{Smi32neuron.jpg}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{A picture of some neurons}; these show the
     pyramidal neurons found in the cortex, part of the brain; they are
     called pyramidal because of the shape of the soma; you can also see the large number of dendrites. Figure from
@@ -112,9 +127,13 @@ those other neurons are cerebellum granule cells, very small neurons
 that receive inputs from only three or four other neurons. 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{A line drawing showing a square maze of dense tiny lines, at its base is a black blob with a thicker line running downwards from it.}}
+{
   \begin{center}
   \includegraphics[width=5cm]{PC.png}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{Drawing of a Purkinje cell}; this is a drawing of a
     Purkinje cell, by Santiago Ram\'{o}n y Cajal, an important
     neuroanatomist active in the late nineteenth and early twentieth
@@ -178,9 +197,13 @@ branch.
 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{This looks like an old hand drawn graph, the curve is first horizontal, it suddenly rises upwards, has a roundish peak and then falls to a lower point than when it started, it resembles the first climb and fall of a rollercoaster in shope. After the fall is gradually rises to the level it started at.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{action_potential.jpg}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{An action potential}; this is an action potential
     recorded from an axon, it is actually a very early recording
     performed by Hodgkin and Huxley, pioneers in recording and
