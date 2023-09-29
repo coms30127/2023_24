@@ -6,6 +6,12 @@
 \pagestyle{fancy}
 \lfoot{\texttt{com30127.github.io}}
 \lhead{Computational Neuroscience - 01.4 areas of the cortex  - Conor}
+
+\usepackage{ifthen}
+\newboolean{nopics}
+\setboolean{nopics}{true}
+
+
 \begin{document}
 
 \section*{Parts of the brain - the cortex}
@@ -18,9 +24,13 @@ forms the outer surface of the mammalian brain. Even the cortex,
 however, has different areas, as we will discuss in this section.
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+           {\textsl{A grey picture of the brain from the side, we notice how folded the brain is, the cerebellum at the back towards the bottom has a different texture, darker with straigher folds.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{brain.jpg}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{A picture of the brain}; when we look at a human
     brain we mostly see cortex, though in this case we can also see
     the cerebellum, labelled 3. Figure from
@@ -46,9 +56,13 @@ the outer layer of the mammalian brain. In the human brain it contains
 distinctive feature of the human brain, Fig.~\ref{fig_cortex}. 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{A brain with a section cut out. We can see the folds right into the brain, the outer layer is dark grey, the inside white and on the folds we can see the grey folded deep into the brain. There are labels on the picture, but they are too small to read.}}
+{
   \begin{center}
-  \includegraphics[width=6cm]{cortex.png}
-\end{center}
+\includegraphics[width=6cm]{cortex.png}
+  \end{center}
+  }
   \caption{\textbf{The cortex}; the cortex, in grey in this picture,
     is an outer layer; in primate brains, and particularily in human
     brains, the cortex has become very folded in an effort to fit more
@@ -66,9 +80,13 @@ the cortex it is divided into columns, with cells inside a given column having m
 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{Three grey panels show hundred of cells, each of the three panels has different distributions of the cells, but in each there are horizontal bands with a different cell density.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{layers.png}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{Layers of the cortex}; in these illustrations by
     Cajal we see different cortical layers, the middle and left how
     soma and the right the dendrites; when Cajal did his drawing he
@@ -130,9 +148,13 @@ but produces what is called `word salad', lots of words included many
 which are not related to the subject of speech.
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{A picture of a brain, it looks very old. There is hole near the front, about a third of the way from the bottom.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{broca.png}
-\end{center}
+  \end{center}
+  }
   \caption{\textbf{A picture of Broca's brain}; the lesion is clearly visible. Figure from
     \texttt{cambridge.org}\label{fig_broca}}
 \end{figure}
@@ -152,9 +174,13 @@ with nouns to a far greater extent than he had problems with verbs.
 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+{\textsl{In a diagram of the brain there are strips marked out in colour, there are vertical each side of a fold half way from front to back. The strip closer to the front is marked premotor cortex, the one behind is marked primary motor cortex. Also marked are posterior parietal cortex, just behind the primary motor cortex, and SMA just in front of premotor cortex. The whole thing is labelled primary somatosensory cortex.}}
+{
   \begin{center}
-  \includegraphics[width=6cm]{Human_motor_cortex.jpg}
-\end{center}
+\includegraphics[width=6cm]{Human_motor_cortex.jpg}
+  \end{center}
+  }
   \caption{\textbf{The motor and somatosensory cortices}; the primary motor
     cortex is in red, the primary somatosensory cortex in green. Figure from
     \texttt{wikipedia}\label{fig_m_and_s}}
@@ -177,9 +203,14 @@ dedicated to each part is proportional to how useful the information
 is, rather than how big the part is, as illustrated in Fig.~\ref{fig_homunculus}.
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+           {\textsl{A section of the brain is marked celebral cortex, its edge is divided up into small regions, each labelled with a part of the body: toes, ankle through to tongue, at the very end some actions: salivation, chewing and swollowing. The whole diagram is labelled motor cortex right hemisphere.}}
+{
   \begin{center}
   \includegraphics[width=6cm]{motor_mapping.jpg}
-\end{center}
+  \end{center}
+  }
+  
   \caption{\textbf{The motor cortex}; the map from cortex to parts of the body for the motor cortex, a similar map exists for the sensory cortex. Figure from
     \texttt{wikipedia}\label{fig_motor}}
 \end{figure}
@@ -187,9 +218,14 @@ is, rather than how big the part is, as illustrated in Fig.~\ref{fig_homunculus}
 
 \begin{figure}[tbhp]
   \begin{center}
+\ifthenelse{\boolean{nopics}}
+{\textsl{A picture of a grotesque distorted man, his torso is shrunked, his lips, hands, feet and penis are huge, his thumbs, big toes and the head of his penis are particularly disproportionate.}}
+{
+  \begin{center}
   \includegraphics[height=5cm]{sensory.jpg}
-\end{center}
-  \caption{\textbf{The sensory homunculus}; this shows parts of the
+  \end{center}
+  }
+      \caption{\textbf{The sensory homunculus}; this shows parts of the
     body proportional to how large an area is given over to it in the
     sensory cortex. I can't remember where I got this figure from and
     so I can't attest to its accuracy, you see other versions with
