@@ -6,6 +6,11 @@
 \pagestyle{fancy}
 \lfoot{\texttt{com30127.github.io}}
 \lhead{Computational Neuroscience - 01.2 Synapses  - Conor}
+
+\usepackage{ifthen}
+\newboolean{nopics}
+\setboolean{nopics}{true}
+
 \begin{document}
 
 \section*{Synapses}
@@ -38,9 +43,13 @@ signal transfer from \textsl{pre-synaptic} axon to
 \subsection*{Chemical synapses} 
 
 \begin{figure}[tbhp]
+\ifthenelse{\boolean{nopics}}
+           {\textsl{A diagram of a synapse. There are three parts, from top to bottom, the axon terminal, the synaptic cleft and the dendritic spine. The terminal looks like a round door knob, bulbous part facing down, the spine is like a flat hill and the gap between them is the cleft. In the axon terminal there are a number of circles labelled as synaptic vesiles, each filled with dots labelled as neurotransmitter, these vesicles are arranged in a circle with an arrow pointing around from one to the next, the bottom one has burst releasing its contents into the cleft. Spanning the edge of the axon terminal are some features that look like two tiny ovals lying parallel to each other, these are labelled as voltage-gated Ca$^{2+}$ channels. On the edge of the dendritic spine facing the cleft there are some small T-shaped features spanning the edge, the top of the T in the cleft, there are labelled receptor. In the spine some wavy lines are labelled  postsynaptic density.}}
+{
   \begin{center}
     \includegraphics[width=8cm]{synapse.png}
-    \end{center}
+  \end{center}
+  }
   \caption{\textbf{A diagram of a synapse}; this cartoon shows the
     main parts of the synapse; the axon of the pre-synaptic neuron is
     coming in from the top, the dendrite of the post-synaptic neuron
@@ -114,9 +123,13 @@ pulse is negative and is called an \textsl{inhibitory post-synaptic
 
 
 \begin{figure}[tbhp]
+  \ifthenelse{\boolean{nopics}}
+{\textsl{A graph, horizontal axis labelled time and running from zero to 100ms, the vertical axis labelled membrane potential and running from -4mV to 8mV. There are two sets of lines, in each case there is a red line in front of some very similar slightly noisier looking grey lines and blue line almost identical to the red one, but not returning quite as fast to zero. The two sets of curves look at lot like you might expect $\pm t\exp{-t/\tau}$ to look, one set of lines is positive, the other negative, the positive has a fairly rapid rise from zero at $t=0$ and then a gradual fall, the negative is the mirror of this. The positive is labelled EPSP, the negative IPSP. }}
+{
   \begin{center}
     \includegraphics[width=8cm]{psp.jpg}
-    \end{center}
+  \end{center}
+  }
   \caption{\textbf{Some PSPs}; the grey lines are recordings for
     individual PSPs with the red lines giving averages and blue lines
     demonstrate a model; we will look at simple models of PSPs
