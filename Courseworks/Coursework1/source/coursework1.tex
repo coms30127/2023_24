@@ -30,7 +30,7 @@ updated at the same time; I will put a hat on the new value, obviously
 in the nex iteration the new value becomes the current value and loses
 the hat. Here there is no threshold and the update rule is:
 \begin{equation}
-  \hat{x}_i=\left\{\begin{array}{ll}1&\sum_j w_{ij}x_j\\-1&\text{otherwise}\end{array}\right.
+  \hat{x}_i=\left\{\begin{array}{ll}1&\sum_j w_{ij}x_j>0\\-1&\text{otherwise}\end{array}\right.
 \end{equation}
 
 You can store patterns in a Hopfield network by setting the synapse
