@@ -61,10 +61,17 @@ while t[-1]<t_final:
     t.append(t[-1]+delta_t)
     f_v.append(f(t[-1]))
 
-
-plt.plot(t,f_euler)
-plt.plot(t,f_rk)
-plt.plot(t,f_v)
+plt.rcParams['font.size'] = 11
+fig, ax = plt.subplots(figsize=(3, 2.5))
+    
+#ax.plot(t,f_euler,label="euler")
+ax.plot(t,f_rk,label="rk")
+ax.plot(t,f_v, label="exp(0.5t)")
+ax.legend(loc="upper left")
+ax.set_xlabel("t")
+plt.tight_layout()
+#plt.savefig("euler_approx.pdf", format='pdf', bbox_inches='tight')
+plt.savefig("rk_approx.pdf", format='pdf', bbox_inches='tight')
 plt.show()
 
 

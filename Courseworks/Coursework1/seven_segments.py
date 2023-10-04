@@ -1,5 +1,5 @@
 #for the submission uncomment the submission statements
-#see submission.README
+#so submission.README
 
 from math import *
 
@@ -41,7 +41,7 @@ def seven_segment(pattern):
 
     
 
-    pattern_b=map(to_bool,pattern)
+    pattern_b=list(map(to_bool,pattern))
 
     hor(pattern_b[0])
     vert(pattern_b[1],pattern_b[2],pattern_b[3])
@@ -73,12 +73,12 @@ print("test1")
 
 test=[1,-1,1,1,-1,1,1,-1,-1,-1,-1]
 
+
 seven_segment(test)
 #submission.seven_segment(test)
 ##for COMSM0027
 
 ##where energy is the energy of test
-#submission.qquad()
 #submission.print_number(energy)
 
 ##this prints a space
@@ -88,17 +88,17 @@ seven_segment(test)
 #for the final submission it should also output to submission on each step
 
 print("test2")
-#submission.section("Test 2")
 
 test=[1,1,1,1,1,1,1,-1,-1,-1,-1]
+#submission.section("Test 1")
 
 seven_segment(test)
+
 
 #submission.seven_segment(test)
 
 ##for COMSM0027
 ##where energy is the energy of test
-#submission.qquad()
 #submission.print_number(energy)
 
 ##this prints a space
@@ -109,3 +109,6 @@ seven_segment(test)
 
 
 #submission.bottomer()
+
+
+
