@@ -10,7 +10,7 @@
 \cfoot{}
 
 \usepackage{graphicx}
-
+\usepackage{pstricks}
 \usepackage{listings}
 
 \usepackage{tikz}
@@ -158,11 +158,13 @@ the age of electronic computers, McCulloch and Pitts believed that
 their neurons might form the natural unit in computer circuits. In
 other words, they thought they might perform the role actually played
 by logical circuits. In fact, it is still not clear if the artificial
-neuron is or isn't the natural unit of computation since they are a
-component in, for example, deep learning networks. In fact, there are
-two major applications of McCulloch-Pitts neurons: the perceptron and
-the Hopfield network. These two applications add a rule for changing
-the connection strength to the original McCulloch-Pitts neuron.
+neuron is or isn't the natural unit of computation in silicon since
+they are a component in, for example, deep learning networks. In fact,
+there are two major applications of McCulloch-Pitts neurons: the
+perceptron and the Hopfield network. These two applications add a rule
+for changing the connection strength to the original McCulloch-Pitts
+neuron.
+
 
 \begin{thebibliography}{10}
 

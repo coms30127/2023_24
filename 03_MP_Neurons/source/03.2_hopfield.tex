@@ -107,7 +107,7 @@
 
 \usepackage{ifthen}
 \newboolean{nopics}
-\setboolean{nopics}{false}
+\setboolean{nopics}{true}
 
 
 \begin{document}
@@ -140,7 +140,7 @@ along with some dynamics that complete partial patters. Imagine a
 sequence of McCulloch-Pitts neurons
 %
 \ifthenelse{\boolean{nopics}}
-             {\quote{\textsl{There are nine circles in a row, from the left cicles one, three and six are red, the rest are blue.}}}
+             {\begin{quote}\textsl{There are nine circles in a row, from the left cicles one, three and six are red, the rest are blue.}\end{quote}}
              {
                \begin{center}
   \begin{tikzpicture}
@@ -160,7 +160,7 @@ sequence of McCulloch-Pitts neurons
 where the filled circles correspond to on. Recall occurs when the network is presented with a partial pattern and evolves into the complete patterns.
 %
 \ifthenelse{\boolean{nopics}}
-           {\quote{\textsl{There are two rows of nine circles, one above the other, in the top row circles one and six are red, the rest blue; in the lower row three is also red; there is an arrow from the top row to the bottom one.}}}
+           {\begin{quote}\textsl{There are two rows of nine circles, one above the other, in the top row circles one and six are red, the rest blue; in the lower row three is also red; there is an arrow from the top row to the bottom one.}\end{quote}}
              {
              \begin{center}
 \begin{tikzpicture}
@@ -187,6 +187,7 @@ where the filled circles correspond to on. Recall occurs when the network is pre
 \filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
 \end{tikzpicture}
 \end{center}
+}
 The Hopfield network is intended to model the recall, and learning, of
 memories in an autoassociative network.
 
@@ -223,11 +224,16 @@ presentation:
 \begin{equation}
 \delta w_{ij}=\frac{\eta}{4} (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
 \end{equation}
-The idea is that following this online rule will bring you to values
-of the online rule leading to the pattern introduced in the formula
-for creating the correct minima: Eqn.~\ref{eq:hop}. The $\alpha$'s are an ofset value which allow the network to reacha stable equilibrium since $\delta w_{ij}$ should stopping changing, on average, if the average fraction of iterations where $x_i$ or $x_j$ is plus one is equal to $\alpha$.
+The idea is that following this online rule will bring you to the
+values in the formula for creating the correct minima:
+Eqn.~\ref{eq:hop}. The $\alpha$'s are an ofset value which allow the
+network to reacha stable equilibrium since $\delta w_{ij}$ should
+stopping changing, on average, if the average fraction of iterations
+where $x_i$ or $x_j$ is plus one is equal to $\alpha$.
 
-
+These changes in the $w_{ij}$ mimick a simple version of
+\textsl{Hebbian plasticity}, a putative description of how the
+synapses in the brain change in response to neuronal activity.
 Synaptic plasticity usually refers to the long-term changes in synapse
 strength, a long term increase in synaptic strength is called
 \textsl{long term potentiation} of LTP, a decrease is called
@@ -270,24 +276,36 @@ $\eta$ is a learning rate. Another version is
 \end{equation}
 where having $\alpha$ allows for different cut-off points between the behaviour that causes potentiation or depression. 
 
-This is clearly, up to a choice of $a$ and rescaling of $\eta$, the
-same as the rule
+This is clearly, up to a change in variables for the $\alpha$ and
+rescaling of $\eta$, this is the same as the rule
 \begin{equation}
 \delta w_{ij}=\frac{\eta}{4} (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
 \end{equation}
 mentioned for Hopfield networks; in fact, in the Hopfield network
 $\alpha$ has to be set equal to the average density of the patterns,
-that is, the average number of ones, for convergence. So, to recap,
-during learning the patterns are activated and plastic changes are
-made to the synapse strength according to a simple correlation based
-Hebbian plasticity rule.
-Typically $\alpha$ is very small for real networks so there will be a large
-increase for the connection between two neurons that are active at the
-same time, a tiny increase for pairs neurons that are inactive at the
-same time and a medium size decrease for pairs of neurons where one is
-active and one inactive. See Fig.~\ref{fig:hebb}.
+that is, the average number of ones, for convergence.
+
+So, to recap, during learning the patterns are activated and plastic
+changes are made to the synapse strength according to a simple
+correlation based Hebbian plasticity rule. In the brain, the idea is
+that outside activity, signals from outside the auto-associative
+network, will cause some of the neurons, the pattern to be learned, to
+be active while others remain dormant. During this time plasticity
+occurs. Latter, during recall, the outside activity causes a fraction
+of the pattern to become activity. The internal dynamics of the
+network, the McCulloch-Pitts updates, cause other neurons to also
+become active, allowing the pattern to repeat.
+
+Typically $\alpha$ is very small for real networks so there will be a
+large increase for the connection between two neurons that are active
+at the same time, a tiny increase for pairs neurons that are inactive
+at the same time and a medium size decrease for pairs of neurons where
+one is active and one inactive. See Fig.~\ref{fig:hebb}.
 
 \begin{figure}
+  \ifthenelse{\boolean{nopics}}
+               {{\textsl{There are nine circles in a row, from the left cicles one, three and six are red, the rest are blue. Each pair of circles is joined by a line; if both circles in the pair are red the line joining them is also red, if both circles are blue, the line is black, if one circle is red and the other blue, the line is yellow.}}}
+             {
 \begin{center}
 \begin{tikzpicture}
 \node[on,text width=0.35cm](0){};
@@ -336,17 +354,21 @@ active and one inactive. See Fig.~\ref{fig:hebb}.
 \path (7) edge[bend right,color=gray] (8);
 \end{tikzpicture}
 \end{center}
+}
 \caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-\alpha)^2$ and the gray by $\eta(-\alpha)^2$, the yellow links decrease by $\eta \alpha(1-\alpha)$.\label{fig:hebb}}
 \end{figure}
 
-During recall some of the neurons are held in the active state and the
-rest of the network evolves according to a threshold input rule. That
-means each neuron has an input given by
+As discussed, during recall some of the neurons are held in the active
+state and the rest of the network evolves according to a threshold
+input rule. That means each neuron has an input given by
 \begin{equation}
 r_i=\sum{w_{ij}x_j}
 \end{equation}
 and is set in the active state if $r_i>0$. The idea is that after
 learning the pattern $\{0,2,5\}$
+\ifthenelse{\boolean{nopics}}
+  {\begin{quote}\textsl{There are nine circles in a row, from the left cicles one, three and six are red, the rest are blue. In this picture the circles are labelled by a number, but using Python conventions, so the three red circles are labelled 0, 2 and 5.}\end{quote}}
+         {
 \begin{center}
 \begin{tikzpicture}
 \node[on,text width=0.35cm](0){0};
@@ -360,7 +382,11 @@ learning the pattern $\{0,2,5\}$
 \node[off,text width=0.35cm,right of = 7](8){8};
 \end{tikzpicture}
 \end{center}
-the connections between these nodes will be strong, so if the network has nodes $\{0,5\}$ activated
+}
+             the connections between these nodes will be strong, so if the network has nodes $\{0,5\}$ activated
+ \ifthenelse{\boolean{nopics}}
+  {\begin{quote}\textsl{There are nine circles in a row labelled zero to eight, all are blue except the cicles labelled 0 and 5.}\end{quote}}
+             {
 \begin{center}
 \begin{tikzpicture}
 \node[on,text width=0.35cm](0){0};
@@ -374,6 +400,7 @@ the connections between these nodes will be strong, so if the network has nodes 
 \node[off,text width=0.35cm,right of = 7](8){8};
 \end{tikzpicture}
 \end{center}
+}
 the value $r_{2}=w_{12}+w_{52}$ will be larger than the threshold and
 the subsequent dynamics will switch neuron 2 on. However, in this
 network, if a different initial set of neurons are activated, the
@@ -391,6 +418,9 @@ number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 
 
 \begin{figure}
+  \ifthenelse{\boolean{nopics}}
+  {{\textsl{There are two rows nine circles in a row labelled zero to eight. In the top row neurons 0, 2 and 5 are red, in the bottom, 1, 5 and 6. In each row lines connect five to the other neurons, with red lines when the other neuron is red, and yellow if the other neuron is blue.}}}
+             {
 \begin{center}
 \begin{tikzpicture}
 \node[on,text width=0.35cm](0){0};
@@ -431,7 +461,8 @@ number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 \path (5) edge[bend right,color=yellow] (8);
 \end{tikzpicture}
 \end{center}
-\caption{Interference in an associate network. Neuron 5 is involved in two patterns and, as a consequence, some of its connections are strengthen for one pattern and weakened for the other, if these strengthening and weakening effects are similar in size it makes it unlikely that either pattern will be accurately retrieved.\label{fig:interfere}}
+}
+\caption{Interference in an auto-associative network. Neuron 5 is involved in two patterns and, as a consequence, some of its connections are strengthen for one pattern and weakened for the other, if these strengthening and weakening effects are similar in size it makes it unlikely that either pattern will be accurately retrieved.\label{fig:interfere}}
 \end{figure}
 
 
@@ -468,25 +499,6 @@ since neurons are not, in reality, on-off units.
 \begin{thebibliography}{10}
 
 \bibitem{McCullochPitts1943}
-McCulloch, W and Pitts, W. (1943). A logical calculus of the ideas immanent in nervous activity. 
-\newblock Bulletin of Mathematical Biophysics, 5:115--133. 
-
-\bibitem{Rosenblatt1958}
-Rosenblatt, F. (1958), The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain, Cornell Aeronautical Laboratory.
-\newblock Psychological Review, 65:386--408.
-
-\bibitem{Albus1971a}
-Albus, JS. (1971) A theory of cerebellar function. 
-\newblock Mathematical Biosciences 10: 25--61.
-
-
-\bibitem{GaoEtAl1996a}
-Gao J-H, Parsons LM, Bower JM, Xiong J, Li J and Fox PT (1996) Cerebellum implicated in sensory acquisition and discrimination rather than motor control.
-\newblock Science 272: 545--7. 
-
-\bibitem{Marr1969a}
-Marr, D (1969) A theory of cerebellar cortex.
-\newblock Journal of Physiology 202: 437--70.
 
 \bibitem{Hopfield1982}
 Hopfield, JJ. (1982) Neural networks and physical systems with emergent collective computational abilities.
