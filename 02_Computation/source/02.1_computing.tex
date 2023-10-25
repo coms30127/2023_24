@@ -1,7 +1,8 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,a4wide]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{pstricks}
 \lstset{language=python}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -80,10 +81,8 @@ Python either runs as a script or on an interpreter. To get the
 interpreter you type \texttt{python} on the command line and you get
 something that looks like this:
 \begin{lstlisting}[numbers=right]
-Python 2.7.6 (default, Jun 22 2015, 17:58:13) 
-[GCC 4.8.2] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
+Python 3.10.12 (main, Jun 11 2023, 05:26:28) . . .
+Type "help", "copyright", "credits" or "license" . . .
 >>> 
 >>> 
 \end{lstlisting}
@@ -102,8 +101,8 @@ You can use python on the interpreter as a glorified calculator
 \end{lstlisting}
 It has big numbers which can be useful sometimes
 \begin{lstlisting}[numbers=right]
->>> 2**200
-1606938044258990275541962092341162602522202993782792835301376L
+>>> 2**100
+1267650600228229401496703205376
 \end{lstlisting}
 The \texttt{L} at the end is because it is a long number. To get
 special functions and so forth you need to \texttt{import} the math
