@@ -2,6 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{pstricks}
+
 \usepackage{ifthen}
 \newboolean{nopics}
 \setboolean{nopics}{false}
@@ -99,7 +103,7 @@ does so with a time scale that depends on $\tau$. An example is shown in Fig.~\r
 {\textsl{In a graph with vertical range -0.5 to 2.5 and horizontal range zero to 20, there is a horizontal line at zero; two curves approach it as you go from left to right but they become more and more horizontal the closer they get, the top curve starts at 2.5, the bottom from -0.5 so the top curve falls quicker than the bottom rises.}}
 {
   \begin{center}
-\include{exp_decay}
+%\includegraphics{exp_decay}
   \end{center}
   }
 \caption{Two examples of $f(t)$ decaying towards $\bar{g}$. Here
@@ -128,7 +132,7 @@ illustrated in Fig.~\ref{filtering}.
 {\textsl{In this picture there are two `curves', one is piecewise constant, giving a blocky plot, the other curves exponentially so that it tries to equal the first. When the blocky curve rises to one the other curve rises slowly to meet it, the blocky curve then falls to zero and the other one falls again, next the block curve rises to two and the other curve goes up more quickly, the blocky curve falls again to zero and the other curve follows. Finally the block curve oscillates rapidly between a constant value of one and a value of zero, the other curve moves jaggedly in a more restricted range since it neither has time to approach one during the block curves up sections, or to reach near zero during its down sections. }}
 {
   \begin{center}
-\include{filtering}
+%\includegrahics{filtering}
   \end{center}
   }
 \caption{This shows how the response $f(t)$ filters the input $g(t)$;
