@@ -21,7 +21,7 @@
 
 \usepackage{ifthen}
 \newboolean{nopics}
-\setboolean{nopics}{false}
+\setboolean{nopics}{true}
 
 
 \begin{document}
@@ -126,8 +126,13 @@ passes the height of the water will reach the equilibrium. The plot in
 Fig.~\ref{bucket_v} illustrates this.
 
 \begin{figure}
-\begin{center}
-\include{bucket_v}
+  \begin{center}
+\ifthenelse{\boolean{nopics}}
+    {\textsl{This is a graph, vertical
+      axis marked $h(t)$ running from zero to three, horizonal axis
+      marked $t$ also running from zero to three. There is a
+      horizontal line at one and three other curves, one starting at zero, one at two and the third at three. All decay exponentially to the horizonal line. }}W
+{\include{bucket_v}}
 \end{center}
 \caption{Exponential relaxation. The dynamics described by the
   \lq{}bucket equation\rq{} is very common. Here
@@ -151,7 +156,7 @@ Fig.~\ref{chasing}.
 
 \begin{figure}
 \begin{center}
-\include{chasing}
+  \ifthenelse{\boolean{nopics}}{In this graph the vertical axis runs from -1 to one, the horizonal from zero to 20. There is a sine wave marked input and three other curves, marked $\tau=0.25$, $\tau=2$ and $\tau=4$. The first of these is almost identical to the input curve, the other two are smoother and delayed with there peaks coming after the peaks of input, the peak for $\tau=2$ is around 0.55 and for $\tau=0.4$ it is around 0.3.}  { \include{chasing}}
 \end{center}
 \caption{Variable input. Here the input is a sine wave $i(t)=\sin{t}$
   and the equation is evolved with $h(0)=0$ and three different $\tau$
