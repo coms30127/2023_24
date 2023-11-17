@@ -21,7 +21,7 @@
 
 \usepackage{ifthen}
 \newboolean{nopics}
-\setboolean{nopics}{false}
+\setboolean{nopics}{true}
 
 
 \begin{document}
@@ -51,7 +51,7 @@ which are surrounded by salty water, as in Fig.~\ref{in_out}.
 \begin{figure}
   \begin{center}
     \ifthenelse{\boolean{nopics}}
-    {\textsl{A map of the UK is marked with u\textbf{K}$^+$ in the land area and \textbf{Na}$^+$Cl$*-$ in the sea area} 
+    {\textsl{A map of the UK is marked with u\textbf{K}$^+$ in the land area and \textbf{Na}$^+$Cl$*-$ in the sea area, for comic effect the `UK' as actually just England and Wales.} 
 }
     {      \includegraphics[width=6cm]{in_out_future}
       }
@@ -163,8 +163,11 @@ case the equation can be solved numerically on a computer. An example
 in given in Fig.~\ref{v_i_f}.
 
 \begin{figure}
-\begin{center}
-\include{v_i_f}
+  \begin{center}
+    \ifthenelse{\boolean{nopics}}
+    {\textsl{In this graph the horizontal axis is labelled $t$ (ms), the vertical $V$ $mV$. The former runs from zero to 100, the latter from -70 to 20. There are two curves, one marked $R_mI_e=12$ mV rises from -70 and is soon indistinguishable from a constant lines at -58 mV; the one marked $R_mI_e=16$ mV rises to $-55$ mV, then there is a spike to 20 mV and the curve starts again at $-70$ mV. This happens three times}}
+{  \include{v_i_f}
+ } 
 \end{center}
 \caption{An integrate and fire neuron with different inputs. For
   $R_mI=12 $mV the voltage relaxes towards the equilibrium value
@@ -216,9 +219,12 @@ Finally, this is the time between spikes, so the frequency is one over this. It 
 
 
 \begin{figure}
-\begin{center}
-\include{f_i_curve}
-\end{center}
+  \begin{center}
+    \ifthenelse{\boolean{nopics}}
+    {\textsl{In this graph the vertical axis is marked `firing rate in Hz' and goes from zero to 80, the horizontal $R_mI_e$ and goes from zero to 20. The curve is zero until $R_mI_e=15$, after that it rises, sharply at first, almost going straight up, and then steeply but not quite as steep to reach 80 near $R_mI_e=20$.} }
+{\include{f_i_curve}
+}
+  \end{center}
 \caption{The firing rate, that is spikes per second, for the integrate
   and fire neuron with different constant inputs with $\tau_m=10$ ms,
   $V_T=-55$ mV and both the leak and reset given by $-70$ mV. Notice
