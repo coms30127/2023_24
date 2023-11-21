@@ -21,7 +21,7 @@
 
 \usepackage{ifthen}
 \newboolean{nopics}
-\setboolean{nopics}{true}
+\setboolean{nopics}{false}
 
 
 \begin{document}
@@ -38,11 +38,10 @@ In the simplest model of neurons their voltage dynamics is similar to
 the dynamics of a bucket with a leak and the class of equations that
 apply in this case will also be applied to synapses, for example.
 
-
-\begin{center}
   \ifthenelse{\boolean{nopics}}
-  {\textsl{A rectangle with a small gap at the bottom; there is a line across about four fifths of the way up. An arrow pointing from above is marked $i(t)$, a line pointing out of the gap at the bottom is marked $l(t)$, the distance from the bottom to the line is marked $h(t)$.}}
-{
+  {\textsl{Picture: A rectangle with a small gap at the bottom; there is a line across about four fifths of the way up. An arrow pointing from above is marked $i(t)$, a line pointing out of the gap at the bottom is marked $l(t)$, the distance from the bottom to the line is marked $h(t)$.}}
+  {
+    \begin{center}
   \setlength{\unitlength}{2mm}
 \begin{picture}(20,40)
 \linethickness{0.3mm}
@@ -60,8 +59,9 @@ apply in this case will also be applied to synapses, for example.
 \put(11,27){$i(t)$}
 \put(16,12){$h(t)$}
 \end{picture}
-}
 \end{center}
+  }
+
 
 Consider a bucket with straight sides which is filled to a height $h$
 with water. Imagine the water leaks out of a hole in the bottom. The
@@ -93,11 +93,26 @@ or
 \begin{equation}
 \frac{dh}{dt}=\frac{1}{C}(i-Gh)
 \end{equation}
+or perhaps most usefully
+\begin{equation}
+\tau\frac{dh}{dt}=Ri-h
+\end{equation}
+where $R=1/G$ and, more interestingly, $\tau=C/G$.
+
+The $\tau$ is called $\tau$ because it is a timescale. This can be
+checked in two ways, first, in this equation on the right hand side
+there is a $h$, a length, and $Ri$ which much, therefore also be a
+length. In fact, from $l=Gh$ we can see that $R$ converts flow rates
+like $l(t)$ and $i$ to heights. This implies the left hand side must
+also be a height and $\tau$ is therefore a timescale to balance the
+`per time' from the derivative. We can also check directly. From the
+equation defining $G$ we can see $[G]=L^2/T$ and from we know
+$[C]=L^2$ so $[\tau]=[C]/[G]=T$.
 
 This is an equation we know how to solve; we saw it at the start of
 the course when learning about differential equations. This same
 equation will appear when we look at the dynamics of neuron and for
-similar reasons, something, water inthe case of the bucket, charge in
+similar reasons, something, water in the case of the bucket, charge in
 the case of a neuron, is being added to a leaky container.
 
 
@@ -108,12 +123,40 @@ constant, but we won't try that calculation here since it only works
 for this specific special case, normally we have to solve numerically,
 using a computer. The solution is
 \begin{equation}
-h(t)=[h(0)-i/G]e^{-t/\tau}+i/G
+h(t)=[h(0)-Ri]e^{-t/\tau}+Ri
 \end{equation}
-where $\tau=C/G$. This makes sense, when $h=i/G$ then the equation
-says $dh/dt=0$ so this is an equilibrium point, a value where
-everything stops changing. The dynamics describe the systems as
-decaying exponentially to the equilibrium.
+This makes sense, when $h=Ri$ then the equation says $dh/dt=0$ so
+this is an equilibrium point, a value where everything stops
+changing. The dynamics describe the systems as decaying exponentially
+to the equilibrium.
+
+As for actually finding the solution, that can be
+done a few different ways, I would usually solve it by ansatz, that is
+by guessing the solution and checking I am right, so I would
+substitute in
+\begin{equation}
+  h(t)=A+Be^{rt}
+\end{equation}
+with $A$, $B$ and $r$ constants to get
+\begin{equation}
+  Br\tau e^{rt}=Ri-A-Be^{rt}
+\end{equation}
+and the solution follows by matching up the terms to give $A$ and $r$
+so, equating the coefficients of the exponential I get $r=-1/\tau$ and
+$A=Ri$. To find $B$ you just look at the initial condition, the value
+when $t=0$. Another common approach to these equations is the
+integrating factor, this avoids knowing a good guess as the most of
+ansatz requires, here you rewrite the equation
+\begin{equation}
+  \frac{dh}{dt}+\frac{1}{\tau}h=\frac{R}{\tau}i
+\end{equation}
+and notice that multiplying by $\exp{t/\tau}$ allows you to write the
+left hand side as a product:
+\begin{equation}
+  \frac{d}{dt}\left(he^{t/\tau}\right)=\frac{R}{\tau}ie^{t/\tau}
+\end{equation}
+Next you integrate both sides. There are still other approachs, for
+example, using Laplace transforms.
 
 These dynamics make good intuitive sense; the more water there is in
 the bucket, the higher the pressure will be at the leak and the
@@ -126,14 +169,16 @@ passes the height of the water will reach the equilibrium. The plot in
 Fig.~\ref{bucket_v} illustrates this.
 
 \begin{figure}
-  \begin{center}
 \ifthenelse{\boolean{nopics}}
     {\textsl{This is a graph, vertical
       axis marked $h(t)$ running from zero to three, horizonal axis
       marked $t$ also running from zero to three. There is a
-      horizontal line at one and three other curves, one starting at zero, one at two and the third at three. All decay exponentially to the horizonal line. }}W
-{\include{bucket_v}}
+      horizontal line at one and three other curves, one starting at zero, one at two and the third at three. All decay exponentially to the horizonal line. }}
+    {
+  \begin{center}
+    \include{bucket_v}
 \end{center}
+    }
 \caption{Exponential relaxation. The dynamics described by the
   \lq{}bucket equation\rq{} is very common. Here
   $h(t)$ is plotted with
@@ -155,9 +200,11 @@ smooths it out. This is sometimes described by saying that it
 Fig.~\ref{chasing}.
 
 \begin{figure}
-\begin{center}
-  \ifthenelse{\boolean{nopics}}{In this graph the vertical axis runs from -1 to one, the horizonal from zero to 20. There is a sine wave marked input and three other curves, marked $\tau=0.25$, $\tau=2$ and $\tau=4$. The first of these is almost identical to the input curve, the other two are smoother and delayed with there peaks coming after the peaks of input, the peak for $\tau=2$ is around 0.55 and for $\tau=0.4$ it is around 0.3.}  { \include{chasing}}
-\end{center}
+
+  \ifthenelse{\boolean{nopics}}{
+    \textsl{In this graph the vertical axis runs from -1 to one, the horizonal from zero to 20. There is a sine wave marked input and three other curves, marked $\tau=0.25$, $\tau=2$ and $\tau=4$. The first of these is almost identical to the input curve, the other two are smoother and delayed with there peaks coming after the peaks of input, the peak for $\tau=2$ is around 0.55 and for $\tau=0.4$ it is around 0.3.}
+  }
+{\begin{center} \include{chasing}\end{center}}
 \caption{Variable input. Here the input is a sine wave $i(t)=\sin{t}$
   and the equation is evolved with $h(0)=0$ and three different $\tau$
   values. For $\tau=0.25$ we see $h(t)$ closely matches the input
@@ -210,6 +257,37 @@ Of course, this is just the easiest way to do the integration, there
 are more sophisticated approaches like Runge-Kutta or backwards Euler
 which are more complex and computational costly for each step, but
 which are also much more accurate.
+
+\section{Summary}
+
+Water filling a leaky bucket gives a useful example of the dynamics that will describe a neuron. The idea is that the leak is proportional to the height of the water, so we write:
+\begin{equation}
+  l(t)=Gh(t)
+\end{equation}
+The volume of water is also proportional to the height, so we write:
+\begin{equation}
+  \text{vol}=Ch(t)
+\end{equation}
+where $G$ and $C$ are both constants of proportionality, the $G$ will
+depend in a complicated way on the viscosity of water, the size of the
+hole, the $C$ is more straight-forwardly the cross-sectional area of
+the bucket. Given that the rate of change of volume is given by water
+coming in minus water going out, an writing $i(t)$ for the inflow:
+\begin{equation}
+\frac{dCh(t)}{dt}=i(t)-Gh(t)
+\end{equation}
+This can also be written
+\begin{equation}
+\tau\frac{dh}{dt}=Ri-h
+\end{equation}
+where $R=1/G$ and $\tau=C/G$ is a timescale. By solving for constant
+input and discussing the dynamics we see that the solution to this
+equation `chases' the input $Ri$ over a timescale corresponding to
+$\tau$. Finally we look at numerical approaches: for the Euler
+approximation, the approximate solution at a time $t_n=n\delta t$ is
+\begin{equation}
+  h_n=h_{n-1}+\delta t \left.\frac{dh}{dt}\right|_{t_n}
+\end{equation}
 
 \end{document}
 
