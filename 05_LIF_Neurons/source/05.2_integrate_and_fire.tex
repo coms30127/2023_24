@@ -49,13 +49,14 @@ which are surrounded by salty water, as in Fig.~\ref{in_out}.
 
 
 \begin{figure}
-  \begin{center}
     \ifthenelse{\boolean{nopics}}
     {\textsl{A map of the UK is marked with u\textbf{K}$^+$ in the land area and \textbf{Na}$^+$Cl$*-$ in the sea area, for comic effect the `UK' as actually just England and Wales.} 
 }
-    {      \includegraphics[width=6cm]{in_out_future}
-      }
-\end{center}
+    {
+        \begin{center}
+      \includegraphics[width=6cm]{in_out_future}
+        \end{center}
+        }
 \caption{A cartoon to help you remember that there is more sodium outside the cell and more potassium inside.\label{in_out}}
 \end{figure}
 
@@ -232,6 +233,18 @@ Finally, this is the time between spikes, so the frequency is one over this. It 
   the firing increases very quickly. \label{f_i_curve}}
 \end{figure}
 
+
+We have been ignoring the refractory period, this can easily be added
+to the model. The easiest approach is just to adjust the rule for
+spiking by specifying the voltage remains fixed at $V_r$ for some
+time, $T_r$, corresponding to the refractory period. In fact, the
+refractory period tends to be divided in the \textsl{absolute
+  refractory period} when the neuron can't spike at all and a
+\textsl{relative refractory period} when spiking is just
+harder. Holding $V$ at $V_r$ models an absolute refractory period, to
+model a relative refractory period a negative current can be added to
+the equation.
+
 In fact, neurons tend not to have a regular firing rate; they often,
 for example, show spike rate adaptation. This means that the firing
 rate decreases even if the incoming current remains constant. As we
@@ -244,7 +257,65 @@ and decrease between spikes. Since a potassium current reduces the
 voltage inside the cell, it decreases the firing rate; thus, if the
 cell fires quickly the potassium current increases, decreasing the
 firing rate until the increase in the potassium when there is a spike
-balances the decrease between spikes.
+balances the decrease between spikes. These slow currents are common,
+they may help protect the cell from `exhaustion' by reducing its spike
+rate for ongoing stimuli and they may play a computation role, helping
+the brain infer the nature of stimuli across timescales. The `face of
+Jesus' illusion demonstrates the existence of these currents.
+
+A simple approach, which would approximate adding a potassium would be
+to just add a second input $u$
+\begin{equation}
+  \tau\frac{dV}{dt}=R_mI_e-V+u
+\end{equation}
+where
+\begin{equation}
+  \tau_u\frac{du}{dt}=-u
+\end{equation}
+where there is an additional rule that $u\leftarrow u+\delta u$
+whenever there is a spike. Thus if $u$ is negative it will reduce the
+equilibrium value of $V$, reducing the spike rate if the cell is
+spiking. $u$ will decay towards zero with a timescale $\tau_u$ but
+spiking will change it by $\delta u$. In the case we have discussed
+here, where we want to model a reduction in spiking $\delta u$ would
+be negative and $\tau_u$ would have a moderate timescale, perhaps 200
+ms.
+
+\section*{Summary}
+
+Chemical gradients mean that current flows across the membranes of the
+cell are not zero for zero potential There is a reversal potential for
+each type of ion, this is the value of the potential for which no
+current flows. For our purposes here we consider the leak potential;
+at lower voltages most of the channels that allow ions to pass through
+the membrane are closed, this means the conductance is near zero. The
+are some open channels, mostly for potassium and the corresponding
+reversal potential is called the leak potential $E_l$ while the
+conductance is $g_l$. $E_l$ is often take to be somewhere around -80
+mV. Using Ohms law the equation for the voltage in a cell is then
+\begin{equation}
+  C_m\frac{dV}{dt}=g_l(E_l-V)+I_e
+\end{equation}
+where $C_m$ is the capacitance of the membrane and $I_e$ is the input current. This is also written
+\begin{equation}
+  \tau_m\frac{dV}{dt}=E_l-V+R_mI_e
+\end{equation}
+where $\tau_m$ is a timescale, often around 12-20 ms and
+$R_m=1/g_l$. However, this linear equation does not include the
+nonlinear dynamics that supports spiking, we add spiking `by hand'
+with a rule that says if $V>V_t$, a threshold value, usually about -55
+mV, then there is a spike and the voltage is reset to a reset value
+$V_r$ often set equal to, or a little greater than, $E_l$. This is the
+leaky integrate and fire equation. We know something of what the
+solutions look like from the leaky bucket equation considered before,
+but now there are spikes. We can see that if the equilibrium value
+$E_l+R_mI_e$ is greater than $V_t$ the neuron will spike regularly, if
+it is less, it won't spike at all. The equation leaves out the actual
+spiking dynamics, it also ignores the actual spatial organization of
+the neuron, treating it as a point. It does not include some other
+aspects of neuronal spiking like the refractory period and slow
+currents, though these can be added, at least approximately.
+
 
 \begin{thebibliography}{99}
 \bibitem{Lapicque1907a}
